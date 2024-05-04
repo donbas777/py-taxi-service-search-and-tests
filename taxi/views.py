@@ -52,12 +52,13 @@ class ManufacturerListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
+        queryset = Manufacturer.objects.all()
         form = ManufacturerSearchForm(self.request.GET)
         if form.is_valid():
-            return self.queryset.filter(
+            return queryset.filter(
                 name__icontains=form.cleaned_data["name"]
             )
-        return self.queryset
+        return queryset
 
 
 class ManufacturerCreateView(LoginRequiredMixin, generic.CreateView):
@@ -133,12 +134,13 @@ class DriverListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
+        queryset = Driver.objects.all()
         form = DriverSearchForm(self.request.GET)
         if form.is_valid():
-            return self.queryset.filter(
+            return queryset.filter(
                 username__icontains=form.cleaned_data["username"]
             )
-        return self.queryset
+        return queryset
 
 
 class DriverDetailView(LoginRequiredMixin, generic.DetailView):
